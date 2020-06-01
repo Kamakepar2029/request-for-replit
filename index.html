@@ -1,0 +1,161 @@
+<html>
+    <head>
+        <title>Request</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Request</h1>
+        <div class="date-box">
+            <div class="date-box-in">
+            <div class="date-start" id="date-start"></div>
+            <div class="date-now" id="date-now"></div>
+            </div>
+        </div>
+        <div class="add-items">
+            <input class="add" id="ut" type="url" placeholder="Add your site to the Request QEUE"><br>
+            <button class="btn" onclick="add(urls,num);">Add URL To the qeue</button>
+        </div>
+        <div class="requests" id="requ">
+        </div>
+        <script>
+            
+        </script>
+
+        <style>
+            .btn{
+                background:green;
+                border-radius: 5px;
+                color:white;
+                border:0px;
+            }
+            .btn:hover{
+                background:#305030;
+                color:white;
+            }
+        .add-items{
+            margin-top:20px;
+            display: flex;
+            width:100%;
+        }
+        .add{
+            width:100%;
+            border:1px solid gray;
+            background:white;
+            color:black;
+            border-radius: 5px;
+        }
+        body{
+            background:black;
+            color:white;
+        }
+        .rep{
+            background: orange;
+            padding: 8px;
+            border-radius: 5px;
+            color:white;
+        }
+        .re{
+            text-align:center;
+            margin-top:20px;
+            background: #d100f7;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .link{
+            background: #ff6a6a;
+            color: white;
+            border-radius: 5px;
+            padding: 8px;
+            text-decoration: none;
+            }
+            .date-box{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            }
+            .date-box-in div{
+                margin-top:20px;
+            }
+            .st{
+                background:#4ce34c;
+                padding:8px;
+                color:white;
+                border-radius:5px;
+            }
+            .now {
+            background: #8719ff;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            }
+        </style>
+    <script>
+    var a = ["a", "b", "c"];
+            a.forEach(function(entry) {
+                console.log(entry);
+            });
+            
+            var urls = ['https://film.kamakepar.repl.co'];
+            console.log(urls[0]);
+            num=[];
+            num.push(0);
+            function add(urls, numbers){
+            var url = document.getElementById('ut').value;
+            if (url !== ''){
+            urls.push(url);
+            numbers.push(0);
+            console.log(urls);
+            document.getElementById('ut').value = '';
+            }else{
+            console.log(urls);
+            document.getElementById('ut').value = '';
+            }
+            }
+    var reqt1 = 0;
+    var reqt2 = 0;
+    var reqt3 = 0;
+    function date_time()
+    {
+        var current_datetime = new Date();
+        var day = (current_datetime.getDate());
+        var month = (current_datetime.getMonth()+1);
+        var year = current_datetime.getFullYear();
+        var hours = (current_datetime.getHours());
+        var minutes = (current_datetime.getMinutes());
+        var seconds = (current_datetime.getSeconds());
+
+        return "Day:"+day+"."+month+"."+year+"/ Time:"+ hours+":"+minutes+":"+seconds;
+    }
+    document.getElementById('date-start').innerHTML = 'Date Started Request: <a class="st">'+date_time()+'</a>';
+    function sayHi(urls, numbers) {
+        reqt1 += 1;
+        var pol = '';
+        var something = 0;
+        urls.forEach(function(entry) {
+                numbers[something] +=1;
+                pol = pol + '<div class="re">Request to <a class="link" href="'+entry+'">'+entry+'</a>: <a id="rep1" class="rep">'+numbers[something]+'</a></div>';
+                console.log(entry);
+                let xhr = new XMLHttpRequest(); // инициализируем переменную новым объектом XMLHttpRequest
+	            xhr.open("GET", entry); // определяем параметры для запроса 
+	            xhr.send();
+	            console.log('start help');
+                something+=1;
+        });
+        document.getElementById('requ').innerHTML = pol;
+    }
+    function sayH() {
+    document.getElementById('date-now').innerHTML = 'Date now: '+'<a class="now">'+date_time()+'</a>';
+    }
+    setInterval(sayHi, 6000, urls, num);
+    setInterval(sayH, 100);
+    </script>
+    <style>
+        #dich{
+            display:none;
+        }
+    </style>
+    <div id="dich">
+        
+    </body>
+</html>
